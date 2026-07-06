@@ -1,0 +1,222 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  background: #1b1520;
+  color: #fff4e8;
+  overflow-x: hidden;
+}
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background-image: url("assets/background.png");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(16, 10, 24, 0.35), rgba(16, 10, 24, 0.75)),
+    radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.35) 70%);
+}
+
+.intro {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 700px;
+  padding: 0 24px;
+  transition: 0.8s ease;
+}
+
+.small {
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 18px;
+  color: #ffd2a1;
+}
+
+h1 {
+  font-size: clamp(34px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 1.08;
+  margin-bottom: 32px;
+}
+
+button {
+  border: 1px solid rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.16);
+  color: #fff4e8;
+  padding: 13px 30px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 15px;
+  backdrop-filter: blur(10px);
+  transition: 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.26);
+}
+
+.bottle {
+  position: absolute;
+  z-index: 2;
+  width: min(430px, 75vw);
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%) rotate(-4deg);
+  animation: floatBottle 4s ease-in-out infinite;
+  filter: drop-shadow(0 24px 30px rgba(0,0,0,0.45));
+  opacity: 0.95;
+}
+
+@keyframes floatBottle {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-16px) rotate(-1deg);
+  }
+}
+
+.hero.opened .intro {
+  opacity: 0;
+  transform: translateY(-30px);
+  pointer-events: none;
+}
+
+.hero.opened .bottle {
+  animation: openBottle 1.3s ease forwards;
+}
+
+@keyframes openBottle {
+  0% {
+    transform: translateX(-50%) scale(1) rotate(-4deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) scale(1.4) rotate(8deg);
+    opacity: 0;
+  }
+}
+
+.letter-section {
+  min-height: 100vh;
+  padding: 80px 20px;
+  background:
+    radial-gradient(circle at top, rgba(255, 173, 92, 0.22), transparent 35%),
+    linear-gradient(to bottom, #21162a, #0e1018);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.letter-section.show {
+  display: flex;
+}
+
+.scroll-paper {
+  position: relative;
+  width: min(760px, 92vw);
+  transform: scaleY(0.06);
+  transform-origin: top center;
+  opacity: 0;
+  transition: 1.4s ease;
+}
+
+.scroll-paper.open {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+.letter-content {
+  background:
+    linear-gradient(rgba(255, 239, 202, 0.96), rgba(220, 170, 107, 0.94)),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 34px,
+      rgba(105, 61, 25, 0.13) 35px
+    );
+  color: #3d2414;
+  padding: 72px 42px;
+  border-radius: 10px;
+  box-shadow:
+    0 35px 80px rgba(0,0,0,0.45),
+    inset 0 0 42px rgba(96, 48, 16, 0.2);
+  font-size: clamp(15px, 2.5vw, 18px);
+  line-height: 1.8;
+}
+
+.letter-content p {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: 0.7s ease;
+  margin-bottom: 20px;
+}
+
+.letter-content p.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.roll {
+  position: absolute;
+  left: 50%;
+  width: 104%;
+  height: 42px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: linear-gradient(to bottom, #916137, #e7bd7a, #6b3e1e);
+  box-shadow: 0 12px 22px rgba(0,0,0,0.35);
+  z-index: 3;
+}
+
+.roll.top {
+  top: -20px;
+}
+
+.roll.bottom {
+  bottom: -20px;
+}
+
+.close-btn {
+  margin-top: 48px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.close-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    background-position: center;
+  }
+
+  .bottle {
+    width: 88vw;
+    bottom: 10%;
+  }
+
+  .letter-content {
+    padding: 64px 24px;
+  }
+}
